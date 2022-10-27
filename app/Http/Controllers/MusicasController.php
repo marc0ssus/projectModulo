@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Musica;
+use Session;
 
 class MusicasController extends Controller
 {
@@ -13,7 +15,8 @@ class MusicasController extends Controller
      */
     public function index()
     {
-        //
+        $musicas = Musica::paginate(5);
+        return view('musica.index',array('musicas' => $musicas,'busca'=>null));
     }
 
     /**
@@ -23,7 +26,7 @@ class MusicasController extends Controller
      */
     public function create()
     {
-        //
+        return view('musica.create');
     }
 
     /**
@@ -34,7 +37,28 @@ class MusicasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'nome' => 'required',
+            'banda' => 'required',
+            'album' => 'required',
+            'genero' => 'required',
+            'ano' => 'required',
+        ]);
+        $musica = new Musica();
+        $musica->nome = $request->input('nome');
+        $musica->banda = $request->input('banda');
+        $musica->album = $request->input('album');
+        $musica->genero = $request->input('genero');
+        $musica->ano = $request->input('ano');
+        if($musica->save()) {
+            if($request->hasFile('foto')){
+                $imagem = $request->file('foto');
+                $nomearquivo = md5($musica->id).".".$imagem->getClientOriginalExtension();
+                //dd($imagem, $nomearquivo,$musica->id);
+                $request->file('foto')->move(public_path('.\img\musicas'),$nomearquivo);
+            }
+            return redirect('musicas');
+        }
     }
 
     /**
@@ -45,7 +69,8 @@ class MusicasController extends Controller
      */
     public function show($id)
     {
-        //
+        $musica = Musica::find($id);
+        return view('musica.show',array('musica' => $musica));
     }
 
     /**
@@ -56,7 +81,8 @@ class MusicasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $musica = Musica::find($id);
+        return view('musica.edit',array('musica' => $musica));
     }
 
     /**
@@ -68,7 +94,28 @@ class MusicasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nome' => 'required',
+            'banda' => 'required',
+            'album' => 'required',
+            'genero' => 'required',
+            'ano' => 'required',
+        ]);
+        $musica = Musica::find($id);
+        if($request->hasFile('foto')){
+            $imagem = $request->file('foto');
+            $nomearquivo = md5($musica->id).".".$imagem->getClientOriginalExtension();
+            $request->file('foto')->move(public_path('.\img\musicas'),$nomearquivo);
+        }
+        $musica->nome = $request->input('nome');
+        $musica->banda = $request->input('banda');
+        $musica->album = $request->input('album');
+        $musica->genero = $request->input('genero');
+        $musica->ano = $request->input('ano');
+        if($musica->save()) {
+            Session::flash('mensagem','Música alterada com Sucesso!');
+            return redirect('musicas');
+        }
     }
 
     /**
@@ -79,6 +126,12 @@ class MusicasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $musica = Musica::find($id);
+        if (isset($request->foto)) {
+        unlink($request->foto);
+        }
+        $musica->delete();
+        Session::flash('mensagem','Música excluída com Sucesso!');
+        return redirect(url('musicas/'));
     }
 }

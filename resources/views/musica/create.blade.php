@@ -25,7 +25,12 @@
         {{Form::text('album','',['class'=>'form-control','required','placeholder'=>'Nome da álbum'])}}
 
         {{Form::label('genero', 'Gênero')}}
-        {{Form::text('genero','',['class'=>'form-control','required','placeholder'=>'Nome do gênero'])}}
+        {{Form::text('genero','',['class'=>'form-control','required','placeholder'=>'Selecione um gênero','list'=>'listcategorias'])}}
+        <datalist id='listcategorias'>
+            @foreach($categorias as $categoria)
+                <option value="{{$categoria->id}}">{{$categoria->genero}}</option>
+            @endforeach
+        </datalist>
 
         {{Form::label('ano', 'Ano')}}
         {{Form::number('ano','',['class'=>'form-control','required','placeholder'=>'Ano de lançamento'])}}

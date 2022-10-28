@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\Musica;
 use Session;
@@ -16,7 +17,7 @@ class MusicasController extends Controller
     public function index()
     {
         $musicas = Musica::paginate(5);
-        return view('musica.index',array('musicas' => $musicas,'busca'=>null));
+        return view('musica.index',array('musicas' => $musicas));
     }
 
     /**
@@ -54,7 +55,6 @@ class MusicasController extends Controller
             if($request->hasFile('foto')){
                 $imagem = $request->file('foto');
                 $nomearquivo = md5($musica->id).".".$imagem->getClientOriginalExtension();
-                //dd($imagem, $nomearquivo,$musica->id);
                 $request->file('foto')->move(public_path('.\img\musicas'),$nomearquivo);
             }
             return redirect('musicas');
@@ -81,8 +81,9 @@ class MusicasController extends Controller
      */
     public function edit($id)
     {
+        $categorias = Categoria::All();
         $musica = Musica::find($id);
-        return view('musica.edit',array('musica' => $musica));
+        return view('musica.edit',array('musica' => $musica, 'categorias' => $categorias));
     }
 
     /**

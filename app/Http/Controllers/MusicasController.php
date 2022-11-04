@@ -27,7 +27,8 @@ class MusicasController extends Controller
      */
     public function create()
     {
-        return view('musica.create');
+        $categorias = Categoria::All();
+        return view('musica.create',array('categorias' => $categorias));
     }
 
     /**

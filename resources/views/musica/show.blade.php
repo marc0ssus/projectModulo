@@ -20,7 +20,7 @@
         @endphp
 
         {{Html::image(asset($nomeimagem),'Foto de '.$musica->nome,["class"=>"img-thumbnail w-75 mx-auto d-block"])}}
-
+        
         <div class="card-header">
             <h1>Música - {{$musica->nome}}</h1>
         </div>
@@ -30,7 +30,7 @@
                 Nome: {{$musica->nome}}<br/>
                 Banda: {{$musica->banda}}<br/>
                 Álbum: {{$musica->album}}<br/>
-                Gênero: {{$musica->genero}}<br/>
+                Gênero: {{$musica->categoria->genero}}<br/>
                 Ano: {{$musica->ano}}</p>
         </div>
         <div class="card-footer">

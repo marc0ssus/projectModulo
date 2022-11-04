@@ -14,7 +14,7 @@
         </div>
     @endif
 <br />
-    {{Form::open(['route' => 'musicas.store', 'method' => 'POST'])}}
+    {{Form::open(['route' => 'musicas.store', 'method' => 'POST', 'enctype'=>'multipart/form-data'])}}
         {{Form::label('nome', 'Nome')}}
         {{Form::text('nome','',['class'=>'form-control','required','placeholder'=>'Nome da música'])}}
 
@@ -26,6 +26,7 @@
 
         {{Form::label('genero', 'Gênero')}}
         {{Form::text('genero','',['class'=>'form-control','required','placeholder'=>'Selecione um gênero','list'=>'listcategorias'])}}
+
         <datalist id='listcategorias'>
             @foreach($categorias as $categoria)
                 <option value="{{$categoria->id}}">{{$categoria->genero}}</option>

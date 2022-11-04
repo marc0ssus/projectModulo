@@ -18,19 +18,20 @@
             {{Session::get('mensagem')}}
         </div>
     @endif
-    <br />
+<br />
     {{Form::open(['route' => ['musicas.update',$musica->id], 'method' => 'PUT','enctype'=>'multipart/form-data'])}}
         {{Form::label('nome', 'Nome')}}
-        {{Form::text('nome','',['class'=>'form-control','required','placeholder'=>'Nome da música'])}}
+        {{Form::text('nome',$musica->nome,['class'=>'form-control','required','placeholder'=>'Nome da música'])}}
 
         {{Form::label('banda', 'Banda')}}
-        {{Form::text('banda','',['class'=>'form-control','required','placeholder'=>'Nome da banda'])}}
+        {{Form::text('banda',$musica->banda,['class'=>'form-control','required','placeholder'=>'Nome da banda'])}}
 
         {{Form::label('album', 'Álbum')}}
-        {{Form::text('album','',['class'=>'form-control','required','placeholder'=>'Nome da álbum'])}}
+        {{Form::text('album',$musica->album,['class'=>'form-control','required','placeholder'=>'Nome da álbum'])}}
 
         {{Form::label('genero', 'Gênero')}}
-        {{Form::text('genero','',['class'=>'form-control','required','placeholder'=>'Selecione um gênero','list'=>'listcategorias'])}}
+        {{Form::text('genero',$musica->genero,['class'=>'form-control','required','placeholder'=>'Selecione um gênero','list'=>'listcategorias'])}}
+
         <datalist id='listcategorias'>
             @foreach($categorias as $categoria)
                 <option value="{{$categoria->id}}">{{$categoria->genero}}</option>
@@ -38,7 +39,7 @@
         </datalist>
 
         {{Form::label('ano', 'Ano')}}
-        {{Form::number('ano','',['class'=>'form-control','required','placeholder'=>'Ano de lançamento'])}}
+        {{Form::number('ano',$musica->ano,['class'=>'form-control','required','placeholder'=>'Ano de lançamento'])}}
 
         {{Form::label('foto', 'Foto')}}
         {{Form::file('foto',['class'=>'form-control','id'=>'foto'])}}

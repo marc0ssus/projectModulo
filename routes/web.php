@@ -15,9 +15,8 @@ use App\Http\Controllers\CategoriaController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('musicas/');
-});
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+
 
 Route::resource('musicas',MusicasController::class);
 

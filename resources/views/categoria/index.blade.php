@@ -12,7 +12,7 @@
         @foreach ($categorias as $categoria)
             <tr>
                 <td>
-                    <a href="{{url('categorias/'.$categoria->id)}}">{{$categoria->genero}}</a>
+                    {{$categoria->genero}}
                 </td>
             </tr>
         @endforeach

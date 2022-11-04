@@ -10,6 +10,6 @@ class Musica extends Model
     use HasFactory;
 
     public function categoria() {
-        return $this->belongsTo(Categoria::class, 'genero_fk', 'genero');
+        return $this->belongsTo(Categoria::class, 'genero', 'id');
     }
 }

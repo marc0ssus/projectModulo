@@ -15,7 +15,7 @@
             } elseif (file_exists("./img/musicas/".md5($musica->id).".jpeg")) {
                 $nomeimagem = "./img/musicas/".md5($musica->id).".jpeg";
             } else {
-                $nomeimagem = "./img/musicas/musicasemfoto.webp";
+                $nomeimagem = "./img/musicas/imagemsemfoto.png";
             }
 
             $nomeaudio = "";

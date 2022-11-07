@@ -8,7 +8,7 @@
                 <div class="col m-3 bg-info text-light">
                     <div class="card-header p-2">Músicas</div>
                     <div class="card-body h1 p-5">
-                        {{$nu}}
+                        {{$numMusicas}}
                     </div>
                 </div>
                 <div class="col m-3 bg-white text-black">

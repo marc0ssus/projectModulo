@@ -55,8 +55,13 @@ class MusicasController extends Controller
         if($musica->save()) {
             if($request->hasFile('foto')){
                 $imagem = $request->file('foto');
-                $nomearquivo = md5($musica->id).".".$imagem->getClientOriginalExtension();
-                $request->file('foto')->move(public_path('.\img\musicas'),$nomearquivo);
+                $nomearquivoimg = md5($musica->id).".".$imagem->getClientOriginalExtension();
+                $request->file('foto')->move(public_path('.\img\musicas'),$nomearquivoimg);
+            }
+            if($request->hasFile('audio')){
+                $audio = $request->file('audio');
+                $nomearquivomp = md5($musica->id).".".$audio->getClientOriginalExtension();
+                $request->file('audio')->move(public_path('.\audio'),$nomearquivomp);
             }
             return redirect('musicas');
         }
@@ -108,6 +113,11 @@ class MusicasController extends Controller
             $imagem = $request->file('foto');
             $nomearquivo = md5($musica->id).".".$imagem->getClientOriginalExtension();
             $request->file('foto')->move(public_path('.\img\musicas'),$nomearquivo);
+        }
+        if($request->hasFile('audio')){
+            $audio = $request->file('audio');
+            $nomearquivomp = md5($musica->id).".".$audio->getClientOriginalExtension();
+            $request->file('audio')->move(public_path('.\audio'),$nomearquivomp);
         }
         $musica->nome = $request->input('nome');
         $musica->banda = $request->input('banda');

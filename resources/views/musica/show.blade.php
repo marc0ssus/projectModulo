@@ -17,10 +17,27 @@
             } else {
                 $nomeimagem = "./img/musicas/musicasemfoto.webp";
             }
+
+            $nomeaudio = "";
+            if(file_exists("./audio/".md5($musica->id).".mp3")) {
+                $nomeaudio = "./audio/".md5($musica->id).".mp3";
+            } elseif (file_exists("./audio/".md5($musica->id).".ogg")) {
+                $nomeaudio = "./audio/".md5($musica->id).".ogg";
+            } elseif (file_exists("./audio/".md5($musica->id).".wav")) {
+                $nomeaudio =  "./audio/".md5($musica->id).".wav";
+            }
         @endphp
 
         {{Html::image(asset($nomeimagem),'Foto de '.$musica->nome,["class"=>"img-thumbnail w-75 mx-auto d-block"])}}
-        
+        <br>
+        <div style="text-align:center">
+            <audio controls >
+                <source src="{{asset($nomeaudio)}}" type="audio/mpeg">
+                <source src="{{asset($nomeaudio)}}" type="audio/ogg">
+                <source src="{{asset($nomeaudio)}}" type="audio/wav">
+            </audio>
+        </div>
+        <br>
         <div class="card-header">
             <h1>Música - {{$musica->nome}}</h1>
         </div>

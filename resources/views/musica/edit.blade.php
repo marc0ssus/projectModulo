@@ -43,6 +43,9 @@
 
         {{Form::label('foto', 'Foto')}}
         {{Form::file('foto',['class'=>'form-control','id'=>'foto'])}}
+
+        {{Form::label('audio', 'Audio')}}
+        {{Form::file('audio',['class'=>'form-control','id'=>'audio'])}}
         <br />
         {{Form::submit('Salvar',['class'=>'btn btn-success'])}}
         <a href="{{url('/')}}" class="btn btn-secondary">Voltar</a>

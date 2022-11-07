@@ -38,6 +38,9 @@
 
         {{Form::label('foto', 'Foto')}}
         {{Form::file('foto',['class'=>'form-control','id'=>'foto'])}}
+
+        {{Form::label('audio', 'Audio')}}
+        {{Form::file('audio',['class'=>'form-control','id'=>'audio'])}}
         <br />
         {{Form::submit('Salvar',['class'=>'btn btn-success'])}}
         {!!Form::button('Cancelar',['onclick'=>'javascript:history.go(-1)', 'class'=>'btn btn-secondary'])!!}

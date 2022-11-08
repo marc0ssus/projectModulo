@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Musica;
 use App\Models\Categoria;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,8 @@ class HomeController extends Controller
         // Passar quantidades de Dados - para criar um DashBoard
         $numMusicas = Musica::all()->count();
         $numCategorias = Categoria::all()->count();
-        return view('home',array('numMusicas'=>$numMusicas,'numCategorias'=>$numCategorias));
+        $lastupMusicas = Musica::latest('id')->first()->updated_at->format('d/m/Y');
+        $lastupCategorias = Categoria::latest('id')->first()->updated_at->format('d/m/Y');
+        return view('home',array('numMusicas'=>$numMusicas,'numCategorias'=>$numCategorias, 'lastupMusicas'=>$lastupMusicas, 'lastupCategorias'=>$lastupCategorias));
     }
 }

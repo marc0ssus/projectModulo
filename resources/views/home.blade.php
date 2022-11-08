@@ -1,23 +1,29 @@
 @extends('layout.app')
 @section('title','MÚSICAS')
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-md-11 bg-secondary text-light">
-            <div class="fluid px-3 my-2 h4">{{ __('Dashboard de Quantidade') }}</div>
-            <div class="row text-center h5">
-                <div class="col m-3 bg-info text-light">
-                    <div class="card-header p-2">Músicas</div>
-                    <div class="card-body h1 p-5">
-                        {{$numMusicas}}
-                    </div>
-                </div>
-                <div class="col m-3 bg-white text-black">
-                    <div class="card-header p-2">Categorias</div>
-                    <div class="card-body h1 p-5">
-                        {{$numCategorias}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="card text-center">
+  <div class="card-header">
+    <h3><strong>Músicas</strong></h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Total de Músicas salvas:</h5>
+    <p class="card-text">{{$numMusicas}}</p>
+  </div>
+  <div class="card-footer text-muted">
+    Última atualização: {{$lastupMusicas}}
+  </div>
+</div>
+<br><br>
+<div class="card text-center">
+  <div class="card-header">
+    <h3><strong>Categorias</strong></h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Total de Categorias registradas:</h5>
+    <p class="card-text">{{$numCategorias}}</p>
+  </div>
+  <div class="card-footer text-muted">
+    Última atualização: {{$lastupCategorias}}
+  </div>
+</div>
 @endsection

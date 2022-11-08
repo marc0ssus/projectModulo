@@ -15,7 +15,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::paginate(5);
+        $categorias = Categoria::paginate(10);
         return view('categoria.index',array('categorias' => $categorias));
     }
 
@@ -42,6 +42,9 @@ class CategoriaController extends Controller
         ]);
         $categoria = new Categoria();
         $categoria->genero = $request->input('genero');
+        if($categoria->save()) {
+            return redirect('categoria');
+        }
     }
 
     /**
